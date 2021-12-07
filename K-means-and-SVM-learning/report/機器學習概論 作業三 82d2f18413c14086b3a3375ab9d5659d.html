@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>機器學習概論 作業三</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e8bef594-b866-45f0-8e91-1afdf60b0604" class="page sans"><header><h1 class="page-title">機器學習概論 作業三</h1></header><div class="page-body"><p id="fd81c947-e6c4-4d11-aec8-bf0bf2228c8b" class="">~0812253</p><p id="7af40f10-5de1-4528-a994-eda58f64d9e6" class="">🖇️  程式碼解壓縮後的防暴傳送門門: </p><figure id="6ea111c3-b671-4ee9-98ad-dddc3f8a644f"><div class="source">https://github.com/SwarzChen/K-means-and-SVM-learning</div></figure><p id="ba10d020-cb3b-43e8-986d-4aa28ba1a74f" class="">
+</p><h3 id="5d0b2ae6-eecb-4f87-b74f-e2d16a68a41c" class="">K-means:</h3><hr id="e09e2fe1-81fd-43b6-9ddf-185ca0836985"/><ul id="2aa172f2-ba66-4c15-8995-7e770509bc6e" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Input:</strong><figure id="82d2f184-13c1-4086-b3a3-375ab9d5659d" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.18.14_PM.png"><img style="width:1209px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.18.14_PM.png"/></a></figure></li></ul><p id="811eb36e-c5e8-4d9c-a2a6-b7da1bb70687" class="">修復原資料集多tab的情況，並讀成pandas dataframe。</p><p id="41d69ca0-8fd1-4fc8-92ab-48d99ee37c11" class="">
+</p><ul id="bb8f692f-0786-43b4-bf8b-e3c0056ac060" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Preprocessing:</strong><figure id="007583da-c4e3-4604-a5f2-14c158155264" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.18.56_PM.png"><img style="width:395px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.18.56_PM.png"/></a></figure><p id="1b33c645-3729-49fb-87d2-b982e6537831" class="">資料前處理這次只有shuffle。</p></li></ul><p id="dc94d567-c24a-4812-a8e4-643e345f181e" class="">
+</p><ul id="8f12b468-cafd-4ba1-bc42-5b2d1c45e0fe" class="bulleted-list"><li style="list-style-type:disc"><strong>Model implemetation:</strong><ul id="2c0ef767-9d7a-46df-adcc-0109bd374dcb" class="bulleted-list"><li style="list-style-type:circle">重要函數介紹:<figure id="f15726e5-735b-4a72-81fd-664cb626dfc6" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.19.54_PM.png"><img style="width:446px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.19.54_PM.png"/></a></figure><p id="7afdf96e-9c90-4553-b42b-d6777898e992" class="">定義兩向量之間的歐幾里德距離函數，利用for loop技巧性跳過label欄位，不列入計算。</p><p id="b3244f06-012c-4910-8d51-32e4616927af" class="">
+</p><figure id="68d19273-9a71-487f-a5aa-7a39b653fb54" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.21.35_PM.png"><img style="width:484px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.21.35_PM.png"/></a></figure><p id="612197c0-0db0-42eb-915e-1ee67d2db934" class="">用來決定向量v屬於哪一個centroid。</p><p id="aa325a98-bacf-44b3-b952-55d388398a65" class="">
+</p><figure id="b0722621-2d1a-4f4a-8db2-94d540f7aa69" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.22.13_PM.png"><img style="width:690px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.22.13_PM.png"/></a></figure><p id="6c436d01-ae2a-494c-8529-92baf0635be9" class="">算出新的cluster的mean vector，這裏會算出label的平均但只是為了符合矩陣size，並沒有實際的數值意義，也沒有做使用。</p><p id="9e399955-2093-47d1-949a-93c132c48166" class="">
+</p><figure id="e30fb333-da7d-4b04-9a4a-1be6f23c4b88" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.26.27_PM.png"><img style="width:606px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.26.27_PM.png"/></a></figure><p id="db2b24d2-39a4-48e4-a6ed-ad44c1911d58" class="">當向量的距離足夠小的時候，我判定為兩向量已經相等，以此來避免float運算溢位誤差的問題。</p><p id="ef1367b5-6da6-4324-80ec-86bdbd96561f" class="">
+</p></li></ul><ul id="af4a2aec-d6d4-4e66-8e35-0a5748967c12" class="bulleted-list"><li style="list-style-type:circle">K means 主函數介紹:<figure id="467b7e6a-35bc-4592-b147-8bf9aec79e8d" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.24.12_PM.png"><img style="width:601px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.24.12_PM.png"/></a></figure><p id="d6546bc1-d659-4a01-93dd-79d24bca81d0" class="">利用shuffle達到隨機取三個data的效果。</p><p id="6606dda2-4af3-458b-aa23-7a224fbe1179" class="">
+</p><figure id="2bec0604-a6a6-4c41-ac7a-e09ccaf9b11c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.24.45_PM.png"><img style="width:193px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.24.45_PM.png"/></a></figure><p id="27b53178-d6af-43e2-9ec9-67bc0543ea1b" class="">定義最終分類玩結果的儲存容器，定義終止flag。</p><p id="3945fd30-252f-4692-aaf9-d89195b4bc84" class="">
+</p><figure id="d14841fd-6423-41f0-9cc9-7eff48db6b7e" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.25.19_PM.png"><img style="width:540px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.25.19_PM.png"/></a></figure><p id="77d88daf-c405-4daf-b74f-c60f3f0ed8a0" class="">持續重複kmeans核心算法直到centroid不再移動(剛剛的is_equal函數定義了什麼叫做「不在移動」)。</p><p id="ff3c4833-6405-4619-aa77-87859d61213e" class="">
+</p><figure id="d81b48f7-3f92-4cce-bbe4-070ff87cd400" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.28.46_PM.png"><img style="width:486px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.28.46_PM.png"/></a></figure><p id="961ac891-baea-430e-b6d8-6aad70aeb880" class="">按照順序先存下一份cluster result。</p><p id="d950129b-4997-4498-aef8-6ade54c14333" class="">並且對於原先的cluster重新按照運算結果指定新的label.</p><p id="aee5cf1f-c3d8-4d77-a8fe-7a4c239800eb" class="">
+</p><figure id="aa03a9ba-0233-4192-a8b0-eb01f5c19c15" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.30.14_PM.png"><img style="width:327px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.30.14_PM.png"/></a></figure><p id="74b7ebb0-e80e-48f5-b20d-b663ebfb752f" class="">將結果融合成大的dataframe等等比較好處理。
+</p><figure id="6e0fc0f5-47bd-4caa-b55a-ab802dd6bf3c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.30.51_PM.png"><img style="width:385px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.30.51_PM.png"/></a></figure><p id="72c281d7-7d7f-4cb9-b399-f183693f80fd" class="">解釋完了，就可以直接call函數進行運算，這邊複製一份dataframe是為了重複測試用，這樣函數內的運算就不會影響到了。</p><p id="58f7c9da-dd3f-41fb-9fb2-0ad92d6b07ff" class="">
+</p></li></ul><p id="e496a294-bebd-479a-bd04-e5682787a69f" class="">
+</p></li></ul><ul id="031df0ec-d2a2-4384-a591-f6f8a53ada3e" class="bulleted-list"><li style="list-style-type:disc"><strong>Result:</strong><figure id="897bd6c8-cb51-44d4-ae88-8077aaa95749" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.31.45_PM.png"><img style="width:755px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.31.45_PM.png"/></a></figure><p id="4bc6d7e5-f1ed-4381-88c0-baceed9cb94d" class="">結果展示。</p></li></ul><p id="3ec77afb-e318-404e-b328-2f0073845e70" class="">
+</p><ul id="8e1f0efd-6e0c-4b08-915c-e623dfe43b2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Question:</strong><figure id="1ae65e47-4669-4d05-b97c-658728e03abe" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.33.02_PM.png"><img style="width:459px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.33.02_PM.png"/></a></figure><p id="71b257f3-ea0b-4d04-9bcf-2f1de62b2068" class="">利用PCA dimension reduction技術將資料將成兩維，就可以畫圖了。</p><p id="8cb300d2-fdf6-4f5a-8e50-61f81016f249" class="">
+</p><figure id="3dce9c35-6a6b-4ba3-a416-3f068f0ca149" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.33.59_PM.png"><img style="width:1095px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.33.59_PM.png"/></a></figure><p id="5f6feb7f-97cf-4ddf-ae81-05b5e252edf5" class="">利用matplotlib將圖表畫出來。</p><p id="c5dc22ad-5ece-40af-a0af-59c404581d96" class="">
+</p><figure id="3595f1f4-b0ae-4a44-b0a0-ab789fda1c0f" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.34.26_PM.png"><img style="width:890px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.34.26_PM.png"/></a></figure><p id="b8e2d9a3-126f-40d5-bc52-fb10a1ca7f35" class="">結果展示。</p><p id="ea7be4a0-5056-43e6-be2e-86285276fc93" class="">
+</p><p id="66860bd1-22c8-419f-ac36-b5a825beac17" class="">
+</p></li></ul><h3 id="c35dbc87-7b0a-44a1-8278-cc822834e0c0" class="">SVM:</h3><hr id="3dd0d399-d6f5-4f86-a9f3-a7f4f7379487"/><ul id="2e823e85-22da-4dc2-82ce-fd4113bd764f" class="bulleted-list"><li style="list-style-type:disc">Data input:<figure id="74c05fd8-eab0-44de-9dd0-ae85124d92db" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.35.40_PM.png"><img style="width:1260px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.35.40_PM.png"/></a></figure><p id="adb7e8c8-5437-4276-b661-0fe8eb8ef6d1" class="">將資料讀成pandas dataframe。</p></li></ul><p id="7cfbdf3e-4c97-4a07-b1a4-f0a62b58320c" class="">
+</p><ul id="71b481f8-5dd1-43d0-8ada-3474b680a271" class="bulleted-list"><li style="list-style-type:disc">Data preprocessing:<figure id="4c51898a-854c-4996-9cee-ba338c0c8dd7" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.36.12_PM.png"><img style="width:329px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.36.12_PM.png"/></a></figure></li></ul><p id="9d996d62-eeb4-4e9a-ad82-00afd9f66aad" class="">
+</p><ul id="33d839f5-0843-41e3-ae9b-bab836ea29ac" class="bulleted-list"><li style="list-style-type:disc">linear kernel part:<ul id="18954f55-639b-46c2-8482-5c45ede22b03" class="bulleted-list"><li style="list-style-type:circle">model training:<figure id="c6dda119-f9c1-4b66-a600-fc35b8094a0b" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.37.30_PM.png"><img style="width:738px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.37.30_PM.png"/></a></figure><p id="5be65a65-4f6c-471c-bbb2-58c131a13f6f" class="">實作holdout validation 將資料按照指定比例分割。</p><p id="5f6c4965-a123-4a9b-b21b-9b12355afa50" class="">
+</p><figure id="b3084259-40fe-43e0-b854-6f5158322cac" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.38.31_PM.png"><img style="width:496px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.38.31_PM.png"/></a></figure><p id="c9c12e01-033e-4b8b-ab42-20e76f4e6ba1" class="">利用sklearn套件訓練SVM model。</p><p id="7a7a0d96-daae-44e3-9830-851a16853e30" class="">
+</p></li></ul><ul id="5578af51-9027-418f-9375-a0b08f8ae184" class="bulleted-list"><li style="list-style-type:circle">Result:<figure id="d81dc788-97e5-41c5-9dcd-ab1caeaf3577" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.39.11_PM.png"><img style="width:737px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.39.11_PM.png"/></a></figure><p id="77e321bd-5c1f-4487-b5ca-ae128276194b" class="">預測test dataset並且將result印出</p></li></ul><p id="8794bd8e-1f24-4312-951f-41c1602f5aab" class="">
+</p></li></ul><ul id="befd097e-e945-4736-9010-56ad569d5f18" class="bulleted-list"><li style="list-style-type:disc">polynomial kernel part:<ul id="de7e1a5d-2ec9-46ff-a34c-f9fac2fa0f7c" class="bulleted-list"><li style="list-style-type:circle">model training:<figure id="9623f61c-a370-447b-afd0-95e02e7ea63e" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.42.23_PM.png"><img style="width:673px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.42.23_PM.png"/></a></figure><p id="94c48a44-ced0-40d7-b4a6-3807262cca9b" class="">定義一些等等要用的dataframe，還有定義參數集。</p><p id="9e01a73e-6934-4ee7-8783-71df69126a7b" class="">
+</p><figure id="180efeac-8cbd-4ac6-817c-9b4d144e85f6" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.43.14_PM.png"><img style="width:907px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.43.14_PM.png"/></a></figure><p id="e4c9af42-71f0-44d7-9fad-381ac90bf191" class="">利用5-fold對於參數集進行驗證，看看哪一種排列組合對於模型訓練比較好。
+這裡利用accuracy這項數值作為判定標準。</p><p id="51b2ce6a-4d60-4f1b-845e-ca605055347e" class="">
+</p><figure id="34009976-137e-4146-9934-94b5d07c14f4" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.44.36_PM.png"><img style="width:1223px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.44.36_PM.png"/></a></figure><p id="73efc297-b4ef-4d4d-9445-8a82752512f0" class="">找出有最高表現的參數排列組合，用這個訓練模型。</p><p id="b6fbd18d-de00-4d39-9650-83d4f43901b5" class="">
+</p></li></ul><ul id="5dfef646-aa96-4732-b299-9002d3ea0875" class="bulleted-list"><li style="list-style-type:circle">Result:<figure id="237c99a3-6d17-46fa-8209-64c8e746d766" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.45.25_PM.png"><img style="width:691px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.45.25_PM.png"/></a></figure><p id="2ddea126-2cb7-451e-b521-26de51589ebb" class="">開始組裝結果成為prettytable，包含剛剛對於參數集的評分結果。</p><p id="a4b6ce1d-d117-4c7f-a9cd-1982f7ee7218" class="">
+</p><figure id="8600d1eb-9c2d-415a-85a8-610f91dbe5ac" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.46.09_PM.png"><img style="width:681px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.46.09_PM.png"/></a></figure><p id="a56a9bf8-e3d0-4564-aa75-47836a2f2791" class="">結果展示。</p></li></ul></li></ul><p id="43aaef04-4c66-4388-b243-16e633f5e7b0" class="">
+</p><ul id="d5eda6b6-34d0-4206-afd2-1a19b74d34ee" class="bulleted-list"><li style="list-style-type:disc">RBF kernel part:<ul id="7211b26b-e4c9-4492-a05d-7212963241a8" class="bulleted-list"><li style="list-style-type:circle">model training:<figure id="956e08a9-35e6-4191-b06d-cc3253a86361" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.47.19_PM.png"><img style="width:394px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.47.19_PM.png"/></a></figure><p id="4e503a73-a543-4ffa-a712-92d7439e1462" class="">定義一些等等要用的dataframe，還有定義參數集。</p><p id="c58445b5-ccf1-40d5-af74-e2604e9f650b" class="">
+</p><figure id="0a3a527f-f00b-413a-97e8-6ed6b66cc901" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.47.47_PM.png"><img style="width:560px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.47.47_PM.png"/></a></figure><p id="ca36231c-ec6e-4e32-951e-c6760788bd7c" class="">利用5-fold對於參數集進行驗證，看看哪一種參數對於模型訓練比較好。
+這裡利用accuracy這項數值作為判定標準。</p><p id="c88905c8-2237-483d-8d5d-3c4ecc2b6bc6" class="">
+</p><figure id="d32dad08-757f-4417-8eca-aedc567ac491" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.48.20_PM.png"><img style="width:608px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.48.20_PM.png"/></a></figure><p id="96503859-2375-44e8-9409-88a9f893d0ad" class="">找出表現最好的參數來訓練模型。</p><p id="5b72638a-8e27-4c26-9a6c-8bc0a05d8a6a" class="">
+</p></li></ul><ul id="4bce294f-7d32-4229-aaff-5b1cdc5a879e" class="bulleted-list"><li style="list-style-type:circle">Result:<figure id="ef417152-26f3-4e29-a94e-be37648dbebe" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.48.49_PM.png"><img style="width:680px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.48.49_PM.png"/></a></figure><p id="c3816c2d-ec92-4735-98ef-ae6050505ab9" class="">開始組裝結果成為prettytable，包含剛剛對於參數集的評分結果。</p><p id="e9f54f0b-7347-4f29-89af-5493e5a6091d" class="">
+</p><figure id="05ddf927-13bc-43ca-b924-346a2eb63870" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.49.18_PM.png"><img style="width:651px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%B8%89%2082d2f18413c14086b3a3375ab9d5659d/Screen_Shot_2021-11-30_at_3.49.18_PM.png"/></a></figure><p id="7538b384-6753-4430-bd8b-72dec061305e" class="">結果展示。</p></li></ul></li></ul><p id="493fb268-eac4-4e23-b47e-20f47d3612f8" class="">
+</p><h3 id="20cc8bda-be3b-46b4-ab0d-43ddc1513b15" class="">Comparison &amp; Conclusion:</h3><hr id="785d39ab-2c17-40ea-a7ea-5d2b5f50e86e"/><p id="83b20904-197f-4a80-b7ab-35489bdee2c0" class="">gamma調得太高是跑不完的。</p><p id="f13457bd-019c-46ea-aace-fc203d4b1294" class="">作業們正在我的google calendar上面積極的拓張版圖。</p></div></article></body></html>

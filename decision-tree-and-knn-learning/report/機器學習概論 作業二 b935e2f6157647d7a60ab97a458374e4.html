@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>機器學習概論 作業二</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9365b04c-b425-475d-9e82-acf33f764497" class="page sans"><header><h1 class="page-title">機器學習概論 作業二</h1></header><div class="page-body"><p id="0f3be457-5a48-4dd2-ad84-d828038ac7ec" class="">~0812253 陳彥廷</p><p id="a2b73e8a-73ba-4018-b22a-f687251e68b2" class="">
+</p><h3 id="72b035c9-6687-48b0-a4d4-f1970870674f" class="">Data Input:</h3><hr id="8a31e242-72ac-4db2-9df4-69aaf6b9bbe0"/><figure id="b935e2f6-1576-47d7-a60a-b97a458374e4" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.17.01_PM.png"><img style="width:1049px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.17.01_PM.png"/></a></figure><p id="742b1369-37b0-43b8-abe5-53758a97ebdd" class="">將下載下來的csv檔案資料讀取成為pandas dataframe</p><p id="d7b5d27d-c334-4e98-a546-375d1253591a" class="">
+</p><p id="25d38bdf-d813-4b09-bb05-fbe4c8a7d4c0" class="">
+</p><h3 id="d2fe79e4-c3fb-4024-8f0b-986e9aa90f26" class="">Data Preprocessing:</h3><hr id="e1f94ba4-2c0b-4997-8f51-7dc5d05faac3"/><figure id="08b1c9d3-7016-4f6b-b5ec-6506e0a38531" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.18.21_PM.png"><img style="width:763px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.18.21_PM.png"/></a></figure><p id="5ea810a0-7243-4b59-b272-3861b4ecafe8" class="">對於categorical類別的資料，手動將整個column轉換為one-hot encode形式。假設類別有ABC三個，我將 A 設成 0， B 設成 1，C 設成 2... 以此類推。</p><p id="ff0c2a31-437a-4b21-82b0-afd03a7f1bb6" class="">同時將資料進行shuffle。</p><p id="30e39665-4ffb-4bde-bf71-8b5c5c3b97b8" class="">
+</p><figure id="ff39201e-79b9-4787-901e-6c63e77f569e" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.20.06_PM.png"><img style="width:564px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.20.06_PM.png"/></a></figure><p id="e0157f63-016d-4dd9-b2ca-2d3c155e1ebc" class="">再來根據data section的需求，定義兩個將label轉換為指定形式的function，分別為binary形式以及five_level形式。</p><p id="0dc7e317-01fb-4b6a-9a40-6e94ab2bc3e2" class="">
+</p><p id="589000c4-faa1-4b2a-a27a-4c7644f6b22c" class="">
+</p><h3 id="602b44cc-3168-40c7-b50f-92096d80f6f7" class="">Model Construction and PCA:</h3><hr id="3dae18b6-b32f-425b-8427-3529b512817c"/><p id="29e7ee4f-3563-4cca-869e-abab6b0054d1" class="">對於下列說明的每一個model構建函數，我都利用bool值判斷輸入的training data是否需要做PCA reduction。</p><p id="e3f227c3-4830-48ec-be25-0c0a5c837152" class="">
+</p><ul id="fbbc069b-21bd-40d5-a94b-1ef785d442bc" class="bulleted-list"><li style="list-style-type:disc">Decision tree:<figure id="c7a194f9-3737-4e76-9579-ed196aaf1229" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.23.27_PM.png"><img style="width:858px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.23.27_PM.png"/></a></figure><p id="de28c534-e978-4374-b503-d88d6bbb605b" class="">這邊我直接使用sklearn提供的 DecisionTreeClassifier model進行訓練。這個model主要用到的演算法形式為CART algorithm，並非助教所建議的ID3（下方有官方文擋提到）。</p><figure id="706acd9f-79fd-4005-a281-91b0ae275419" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.25.35_PM.png"><img style="width:940px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.25.35_PM.png"/></a></figure><p id="f5c61b00-1af5-4d85-8bc8-43c78b4e37d8" class="">
+</p><p id="b3f97cd7-2f27-4e76-b218-3cf3be43eaac" class="">完成model training跟prediction之後我直接將結果用testing set 核對過後把需要的result回傳。
+</p></li></ul><ul id="397989cf-f760-47cf-844c-b32df620fc5d" class="bulleted-list"><li style="list-style-type:disc">Random forest:<figure id="93879c6e-91ea-463a-aba5-f4b498ab4841" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.27.05_PM.png"><img style="width:860px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.27.05_PM.png"/></a></figure><p id="3e7e682a-2c19-4b68-a9f0-9030ec1c7a81" class="">這邊基本上和上面類似，不一樣的就只有演算法換成random forest，一樣是使用sklearn套件。</p><p id="00668512-8c0f-4179-bf2f-8a83e5c752b1" class="">
+</p></li></ul><ul id="41a6d134-2ae0-4c44-b7b7-ce1ba5339e9d" class="bulleted-list"><li style="list-style-type:disc">KNN:<figure id="8ad0cc6c-ee67-4da3-9d52-48891214f725" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.28.07_PM.png"><img style="width:854px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.28.07_PM.png"/></a></figure><p id="eeba96c3-8b15-41a4-a4c0-3dd18843fc1e" class="">這邊基本上和上面類似，不一樣的就只有演算法換成KNN，一樣是使用sklearn套件。</p><p id="d988d31e-bbda-45f8-b6ff-c204eec5930e" class="">
+</p></li></ul><p id="847e8652-6e63-4fb1-9881-0b74e96061ff" class="">
+</p><p id="2cf762d6-4aa7-433c-bb08-78f26b064de4" class="">
+</p><h3 id="f9ff19f7-3003-46f1-88a3-326e7676f685" class="">Validation with Binary label:</h3><hr id="c03fbb77-3e90-4719-a5db-3eda8a005f22"/><figure id="d57fbf43-e424-47c0-bf46-f707601b47a5" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.29.14_PM.png"><img style="width:674px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.29.14_PM.png"/></a></figure><p id="c133da96-c07a-48ac-b48e-d68d57014123" class="">首先我先定義了一個K3函數，主要是進行 3-fold cross-validation。驗證的部分只有label不一樣，所以等等我們建構不一樣的dataframe送進這個函數驗證就好了。</p><p id="d96ce450-2ebd-4e6f-944c-17f28e837bc6" class="">
+</p><p id="6fe650d2-541a-4396-8b43-9fa2ffde59c5" class="">這個函數會把所有需要的結果存在一個dict裏面，最後一起計算平均值後print出來。</p><p id="95c3735e-4aa1-4e75-b92e-8b90e16f2f06" class="">
+</p><figure id="4e981603-ab20-4c2c-b7b6-1808696be842" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.32.06_PM.png"><img style="width:1445px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.32.06_PM.png"/></a></figure><p id="2254b36c-4c74-4abd-8275-2946bdff14d5" class="">這個部分是將所有的model predict的輸出成果記錄起來。</p><p id="3845a0a6-2758-4f48-ad0f-7c51ad6fbd35" class="">
+</p><p id="aa7d26e7-fc78-4e45-a281-e86bdc0e466c" class="">
+</p><figure id="6556b2cc-b776-4f27-9cef-61b488f6ab1f" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.32.38_PM.png"><img style="width:833px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.32.38_PM.png"/></a></figure><p id="c55a012a-bfb0-4f7d-8230-3b7f6eac0c43" class="">這個部分是將三組結果取平均，實現cross-validation。</p><p id="ecc9a616-2357-4351-afc5-9598b73d0851" class="">
+</p><figure id="4f03ffda-1077-4019-ae68-56e456bdcda8" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.33.18_PM.png"><img style="width:1476px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.33.18_PM.png"/></a></figure><p id="d077cf79-c30a-4add-9731-f695032b4584" class="">這個部分是將結果放到prettytable裡面美美的輸出。</p><p id="e546cf0e-e009-454b-ab5c-28c6c013c800" class="">
+</p><figure id="d5bf4cfd-e57e-4fa8-9fb1-f8c1c8433c0b" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.33.48_PM.png"><img style="width:303px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.33.48_PM.png"/></a></figure><p id="8274f936-0220-493c-a259-0245a87f1f77" class="">按照剛剛提到的，這邊造一個binary label放進去。</p><figure id="2c170bd6-b3b7-47d3-a803-5bb180392fe1" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.34.19_PM.png"><img style="width:307px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.34.19_PM.png"/></a></figure><p id="3b669b14-a8c5-44b3-8cbb-71f5fb8d14af" class="">這邊造一個5-level放進去。</p><p id="21faf27f-59ae-40e1-8044-b0fe768dcd66" class="">
+</p><figure id="b5475871-a26d-4bfe-b2e3-7224b2f00d1c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.35.19_PM.png"><img style="width:1042px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.35.19_PM.png"/></a></figure><p id="486a0053-f711-477a-bdd8-e04202cd6c3c" class="">這個是binary label按照需求的結果輸出。</p><p id="0925a249-ea5d-4a65-954f-9a6eac409315" class="">
+</p><figure id="037ea43b-a7fa-4b3d-8bc0-bad00519d256" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.01_PM.png"><img style="width:1352px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.01_PM.png"/></a></figure><figure id="a84890dc-d020-4e9d-92ae-9d10a1f67f81" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.27_PM.png"><img style="width:1342px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.27_PM.png"/></a></figure><figure id="40d906af-8aae-4def-8e9f-cc23e3924b55" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.55_PM.png"><img style="width:1340px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.36.55_PM.png"/></a></figure><p id="812acf99-2dc2-4fb0-ba61-f08994744ea8" class="">這個5-level按照需求的結果輸出。</p><p id="027d734e-9092-44c5-9c65-c1028ae02461" class="">
+</p><h3 id="5ef47228-451c-4fa8-a762-ebe44fa59a97" class="">Comparison and Conclusion:</h3><hr id="cdd2aff2-91e3-404b-a745-fba6c24298f9"/><p id="a3dad4cc-09d3-496f-a083-89c8843dcc62" class="">PCA的表現結果並不穩定... 作業好多好想死...</p><p id="a606c645-34d6-4452-a87c-ae6693b0f07f" class="">
+</p><h3 id="3facec5c-c355-4c16-855b-d8f2bd45b777" class="">Question:</h3><hr id="e7df1951-df4f-4033-a331-880b90d8f247"/><ul id="e2630c4a-ff02-4b39-9f5c-d02d05b7e860" class="bulleted-list"><li style="list-style-type:disc">Decision tree:<figure id="0cd340ce-5dce-4deb-b2d4-786e36911eb5" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.38.30_PM.png"><img style="width:1074px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.38.30_PM.png"/></a></figure><p id="3bc28dec-67e1-4e98-9647-419be9d965bc" class="">利用graphviz套件將decision tree深度為4的樹畫出來。</p><p id="49c692b4-0cc6-4f47-a37f-b62c0aa4f005" class="">取一個test vector:(第一個index == 53的那個) QQ activities是0.3沒顯示GG</p><figure id="713a5085-9f10-4c40-a449-98017deae57c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.39.28_PM.png"><img style="width:677px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.39.28_PM.png"/></a></figure><p id="b006fbe0-4fbb-4a67-8880-606573fe0ca8" class="">
+</p><p id="71914cc9-51e1-4cfe-a9d6-7b723e90e7e1" class="">判斷結果如下(reasoning):</p><figure id="711780df-9720-4559-98f3-dd2b4d128d5e" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Q1.png"><img style="width:1200px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Q1.png"/></a></figure><p id="daa77dfa-7607-480b-a7ec-ff297afcaa8c" class="">
+</p></li></ul><ul id="04a5eb26-f027-452b-96dc-ef4698eecea9" class="bulleted-list"><li style="list-style-type:disc">Random forest:<p id="ff028c4d-d5f5-47f9-8188-ff9b0193ffd2" class="">bagging:</p><p id="b3f61102-56fa-410a-b10b-989f1e47b0fd" class="">bagging指的是「重新取樣原有Data產生新的Data，取樣的過程是均勻且可以重複取樣的」，使用Bootstrap我們就可以從一組Data中生出多組Dataset。
+此種方法會從Training dataset中取出K個樣本，再從這K個樣本訓練出K個分類器（在此為tree）。每次取出的K個樣本皆會再放回母體，因此這個K個樣本之間會有部份資料重複，不過由於每顆樹的樣本還是不同，因此訓練出的分類器（樹）之間是具有差異性的，而每個分類器的權重一致最後用投票方式(Majority vote)得到最終結果。</p><p id="9204bd37-0359-4d67-b51a-c523dfaa6403" class="">
+</p><p id="71afca07-78fa-497c-86df-84a5844986f3" class="">boosting:</p><p id="cc0574e5-81ab-428f-9f91-ec6ac5351322" class="">與Bagging類似，但更強調對錯誤部份加強學習以提升整體的效率。是透過將舊分類器的錯誤資料權重提高，加重對錯誤部分的練習，訓練出新的分類器，這樣新的分類器就會學習到錯誤分類資料(misclassified data)的特性，進而提升分類結果。就好像在學校考試時，面臨大型考試前都會加強比較弱的部分或是把之前考試時錯誤的題目再多練習幾次。</p><p id="3fcf0467-f390-4a8b-b5ac-b7a763777f7a" class="">
+</p></li></ul><ul id="41044d7b-9fb8-4fe3-b61a-7156e4dca953" class="bulleted-list"><li style="list-style-type:disc">KNN:<figure id="3e6b3a4c-6e98-41ab-813b-f1192f67a2d7" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.44.51_PM.png"><img style="width:710px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.44.51_PM.png"/></a></figure><p id="00d33836-17ca-4a69-880e-094be8e4ea1c" class="">利用一樣3-fold cross-validation進行一次的結果，印出其中一次的3個neighbor。</p><p id="f590eb7f-3479-495c-af80-a80533505c2c" class="">
+</p><figure id="81f608c6-206e-43a6-9c14-07a965a0ddae" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.19_PM.png"><img style="width:650px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.19_PM.png"/></a></figure><p id="f813e5cb-4327-46f8-b75a-5103ac9a6a8e" class="">第一個neighbor的資料。</p><p id="34b9f115-a31f-4ff5-aae4-75e8e417aa91" class="">
+</p><figure id="a2411ce6-9492-42ad-8c64-04c891c13e6c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.32_PM.png"><img style="width:640px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.32_PM.png"/></a></figure><p id="bf676e11-71ba-4314-a5e7-d80203091b39" class="">第二個neighbor的資料。</p><p id="b826d497-748d-4fba-a1c5-1627a5957f81" class="">
+</p><figure id="02a7d4d2-ee33-48ca-afdc-58a17fc0a46a" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.53_PM.png"><img style="width:635px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.46.53_PM.png"/></a></figure><p id="9fe3cd78-789a-461f-8343-74bd3c7f1ba7" class="">第三個neighbor的資料。</p><p id="d0c2e2ce-3272-403c-b1b7-c2f1436f3dcc" class="">
+</p><p id="f765a4b5-645a-4d4f-92c6-96d197c5fc12" class="">以下是結果：</p><figure id="3049ab3f-9147-4612-9b95-f63897c62c52" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.47.14_PM.png"><img style="width:182px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.47.14_PM.png"/></a></figure><p id="cc6fe834-ca95-4670-a8e5-9c1e8135a189" class="">
+</p></li></ul><ul id="9f703230-ccc5-467b-b0b9-db5c7dbf5367" class="bulleted-list"><li style="list-style-type:disc">PCA:<figure id="433155fd-c99b-4ad2-a439-51bcc5da5e02" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.47.50_PM.png"><img style="width:708px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.47.50_PM.png"/></a></figure><p id="575235ed-2751-4652-b874-f49093a0aab1" class="">將為之後利用plt scatter畫圖，結果如下:</p><p id="03102247-fa51-40b2-bf65-681bbc2b0dab" class="">
+</p><figure id="24ebaedd-6012-4fdc-8933-96c6b0d0486c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.48.17_PM.png"><img style="width:892px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%8C%20b935e2f6157647d7a60ab97a458374e4/Screen_Shot_2021-11-16_at_11.48.17_PM.png"/></a></figure><p id="f3b8dd8f-19a2-4bb1-b833-47dc15b02785" class="">
+</p><p id="6c2fb19d-c2fd-44a0-a24b-63fa3e227f56" class="">
+</p></li></ul></div></article></body></html>
