@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>機器學習概論 作業五</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b65161f2-8625-4c72-8334-f9feaa3c0a0d" class="page sans"><header><h1 class="page-title">機器學習概論 作業五</h1></header><div class="page-body"><p id="1a0f1c69-2ca7-40a4-a5c1-2b54ddcd79ea" class="">~0812253 陳彥廷</p><p id="81fcd0d0-5eab-4af6-9545-bd59e9d772d5" class="">解壓縮src防暴傳送門: <a href="https://github.com/SwarzChen/machine-learning-basic">https://github.com/SwarzChen/machine-learning-basic</a></p><p id="976ee3a9-7fae-4831-8248-24d211195d6f" class="">
+</p><h3 id="2a8572be-a04d-4305-9704-2fa0037f3c05" class="">Data Input</h3><hr id="ec29eec7-a7b0-477f-95bf-840960710abc"/><figure id="816418b1-90e0-44ed-ae9e-87751efe7e1c" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.24.14_PM.png"><img style="width:737px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.24.14_PM.png"/></a></figure><p id="b65d9e7f-ac0d-4c3e-9c7d-9caf7360c0bc" class="">首先我先import了一大堆等等會用到的東西，然後利用pandas的read_json將資料初步讀取成很醜的dataframe。</p><p id="9596ba20-97fa-4c46-8c70-2f5896efe2a4" class="">
+</p><h3 id="92cbfd0f-78f7-4859-91f1-2ed0dc944ee2" class="">Data Visualization</h3><hr id="e2e118a1-6147-4bd4-86b3-9cc2ef8d6588"/><ul id="6bb5cbad-be61-4ddb-bf07-306cc7e51212" class="bulleted-list"><li style="list-style-type:disc">Plot the data distribution by <strong>value count</strong> of their labels (targets):<figure id="98c2b4ad-2d44-4d03-b644-1b91feabab93" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.30.34_PM.png"><img style="width:803px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.30.34_PM.png"/></a></figure><p id="0343433e-0c8a-46a3-a0e6-976c9749eba2" class="">首先我先定義了一個繪圖函數，用來把等等的計算結果畫出來。</p><p id="b3468bbe-0007-42cc-91de-b14d7d48fdaf" class="">計算的部分就是建立一個dictionary簡單把每一個label的資料筆數加總起來，然後再用剛剛的函數把它畫出來。</p><p id="909db0af-d657-485e-8a51-b4fd76034ee7" class="">
+</p><figure id="67cc9f2d-3e2c-4dba-822f-f36a38e94196" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.33.59_PM.png"><img style="width:975px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.33.59_PM.png"/></a></figure><p id="8e2c6e7b-a47c-4637-9449-89b8717155dd" class="">結果展示。</p><p id="8201b2dc-ac51-401f-92d0-77f0034b456c" class="">
+</p></li></ul><ul id="deca4c6c-62de-4502-a441-26a730a52186" class="bulleted-list"><li style="list-style-type:disc">Plot the data distribution by value count of top 30 features:<figure id="c8aff6d3-5771-475c-84bd-72664c4616c8" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.34.56_PM.png"><img style="width:758px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.34.56_PM.png"/></a></figure><p id="d7b8360c-80cf-46f9-be46-d992223ef40a" class="">先把每一個feature(也就是ingredients陣列裡面的原料種類)，透過遍歷整個dataframe進行統計計算，並且將結果儲存在dataframe。</p><p id="f3702877-4226-44e6-8d3a-50f9a6d72ff1" class="">最後再將dictionary按照value進行排序，取最高的30e個，最後利用畫圖函數將結果呈現。</p><p id="14167ffa-e274-4485-a533-aee940270801" class="">
+</p><figure id="578a4cb8-0f6b-46f0-98bd-465e046a5dbf" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.38.22_PM.png"><img style="width:1028px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.38.22_PM.png"/></a></figure><p id="eb2854ec-1056-4547-8aac-3d5da5e54728" class="">結果展示。</p><p id="2545e974-30ae-40dc-bfc0-bd114d25c0a1" class="">
+</p></li></ul><ul id="7be69fb3-c8d8-40e5-bed8-d7c71afffe38" class="bulleted-list"><li style="list-style-type:disc">Plot the data distribution by value count of the number of ingredients:<figure id="9dc64283-a32e-4caf-9926-1a7274958ce2" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.39.06_PM.png"><img style="width:857px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.39.06_PM.png"/></a></figure><p id="ea093735-54d7-4bb0-a966-607ed8d80c25" class="">需求看了討論區之後得知是將ingredients數目一樣的算成一類，那就簡單計算dataframe的ingredient那一欄的陣列長度，並且將一樣的累加起來。
+之後對於key值進行排序，讓等等的輸出結果比較好判斷。
+最後再利用繪圖函數將結果畫出來。</p><p id="a2c15fca-c2d1-4311-b392-26dc95369d76" class="">
+</p><figure id="11aa61d9-ad82-4958-8370-37afb5733c01" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.41.16_PM.png"><img style="width:918px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.41.16_PM.png"/></a></figure><p id="ae78ba31-516a-4e1e-8f79-16b9fa6d106e" class="">結果展示。</p><p id="b1223a1a-c03e-4cce-97f5-bde5dba19bcc" class="">
+</p></li></ul><h3 id="55446ec1-eb9a-4c2f-96ce-c62c4be6c03c" class="">Data Preprocessing</h3><hr id="78c2516d-c9b8-4b4a-8273-c3d283bedd37"/><figure id="687433ec-3839-4096-833e-7b2f0ee48237" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.42.14_PM.png"><img style="width:628px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.42.14_PM.png"/></a></figure><p id="b0faf919-b91b-4abf-9a88-dacaf73c2288" class="">首先將資料打亂。</p><p id="c8df3391-4b92-4f2f-9c34-9922f41c94cb" class="">之後將剛剛很醜的dataframe的label以及feature分開來，並且對於所有feature進行one-hot encoding。</p><p id="6727927e-dfc5-4da2-b80e-7117c8800a75" class="">
+</p><figure id="0796b9ec-0b60-4a79-ae98-d244c2816263" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.46.40_PM.png"><img style="width:1485px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.46.40_PM.png"/></a></figure><p id="75cdaf46-9dc1-400e-8f53-fab7a473273a" class="">做完大概長這樣。</p><p id="aabba46d-2f66-4de4-8657-e4ca8dfcaeb6" class="">
+</p><figure id="533d6516-0c4e-4536-bd17-a444adfac076" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.47.28_PM.png"><img style="width:922px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.47.28_PM.png"/></a></figure><figure id="0deac8f0-4440-4258-83ea-266d4aee40af" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.58.34_PM.png"><img style="width:613px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.58.34_PM.png"/></a></figure><p id="e074757d-36b0-4299-b91e-fa754e9b8586" class="">接下來再處理label的部分。我將每一個label利用正整數來做代表，因為我用的是pytorch所以我的input target 不可以是string形式，實作方式則是簡單的使用雙向map對應。</p><p id="ff90e42c-7a50-4806-93ba-0b3385411dd5" class="">然後進行資料集的分割，按照需求是7:3。</p><p id="d6feb03b-7589-4b70-b4a9-69b717bb89a0" class="">並且將分割好的集合轉乘pytorch tensor，等等訓練模型跟驗證模型會用到。</p><p id="37e7ff51-ae3e-42ec-ae61-52a7c701ea66" class="">
+</p><h3 id="8687ca79-621a-468c-bf0b-8cad0f5a2428" class="">Model Construction:</h3><hr id="2aed081f-e024-4af4-a979-bfdd069e58c7"/><figure id="612b4e19-7817-4ec0-896b-3651151e5bfd" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.58.51_PM.png"><img style="width:590px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_3.58.51_PM.png"/></a></figure><p id="c5bc4763-ce8d-4a1d-80c5-53d6c8778449" class="">利用pytorch 簡單建立一個單層模型。隨機設定中間的dimension成500。</p><p id="d0e104f0-1256-4643-907f-6bcfda9d30da" class="">其實我嘗試過利用2層以及3層的模型，但是表現都不太好，最扣到只剩下一層後表現是最好的。</p><p id="e62d9d41-8614-4b7a-92cf-5add51bf0da2" class="">然後誤差函數的部分我使用CrossEntropyLoss的方法實作。</p><p id="3dfb52bd-bc76-419f-b336-bbe97d692ac8" class="">最佳化演算法的部分我並沒有選擇傳統的SGD演算法，而是選用Adam演算法(原先SGD的一種擴展版本)。</p><p id="942baf79-f11c-4c66-8dd1-152a598430ec" class="">
+</p><h3 id="6922b93f-8c43-496e-a431-bb8f59ae2eec" class="">Model Training:</h3><hr id="1ba6d9ad-572d-41d6-98e9-a3dba09339f2"/><figure id="adf409c6-ef44-44ee-b253-c6d887cd19e2" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.06.32_PM.png"><img style="width:472px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.06.32_PM.png"/></a></figure><p id="b096957b-5fd4-4792-b991-17e46b16c436" class="">我們一般將做完一次批次訓練＋調整節點權數的過程叫做一輪epochs。</p><p id="cdfff8cd-3823-4feb-b767-a94f7007fa38" class="">這裡透過設置不同的epochs，持續觀察overifitting的情況，最後得到最佳的結果，也就是落在epoch = 60附近的時候。因此我們直接將epoch設置成60。</p><p id="ff50be9c-e265-4ed6-b72a-75615af1ad61" class="">每一次訓練都會印出accuracy來持續觀測訓練的成果，當然也有搭配loss一起看。</p><p id="0b1f4151-5450-4fde-83b7-ade92f51a268" class="">
+</p><figure id="1cd950c1-849a-4a61-a908-76f4371ad316" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.09.58_PM.png"><img style="width:192px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.09.58_PM.png"/></a></figure><p id="09bcd746-cd59-407f-b0ed-294d741fc830" class="">訓練過程展示。</p><p id="5eff259c-8751-4749-b343-eddfb305a558" class="">
+</p><h3 id="65513b55-a256-439e-b720-ede6ae36ef94" class="">Result with hold-out validation 7:3</h3><hr id="38c28e73-4941-4eb1-9c66-d1bbd58f824a"/><figure id="aaf55f32-56fd-445a-948a-3bbb36c679f3" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.11.15_PM.png"><img style="width:562px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.11.15_PM.png"/></a></figure><p id="96bc335d-fed9-46f3-9dc9-33c45dc627d4" class="">這裡配合剛剛進行7:3分割資料集，進行最終的結果預測驗證。</p><p id="32e1d90e-af53-4ca0-96b4-d3dc03ce1664" class="">因為confusion matrix真的太大了，所以會分開印，不過分開印還是很大，所以會有換行。</p><p id="ad8b1fd4-d4f5-4ec0-9595-7a11fb2f12ac" class="">
+</p><figure id="a9d1e39a-37f0-4a25-98ed-8fc36d1756cf" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.12.53_PM.png"><img style="width:591px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.12.53_PM.png"/></a></figure><p id="0cc5cebc-7374-4ea1-8509-2967e7fa4593" class="">Confusion matrix結果展示。</p><p id="9b28969b-74f9-4c21-b29b-952a3ffb45f4" class="">
+</p><figure id="5d5c304c-35a1-418f-bb5d-ae8ebb66b001" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.13.16_PM.png"><img style="width:499px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.13.16_PM.png"/></a></figure><p id="c0e95fa7-df27-48cb-9ef3-f53cbd444385" class="">其他剩餘數據的展示。</p><p id="3b008ed4-d4ef-499a-ba1e-5839b9c3d1b1" class="">
+</p><h3 id="406c72a2-5f61-4e41-a57b-c788e3250232" class="">Submission to kaggle:</h3><hr id="2ffe1615-b21c-434a-84cb-8236164fa2b2"/><figure id="688940d5-9d46-49bb-8942-7591e79b7011" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.13.39_PM.png"><img style="width:741px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.13.39_PM.png"/></a></figure><figure id="c38bb35b-7750-4666-9c9e-8ae049e69e4f" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.14.03_PM.png"><img style="width:987px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-28_at_4.14.03_PM.png"/></a></figure><p id="0b84a721-9d6c-4372-b1d9-77feca8edcd9" class="">利用模型預測kaggle競賽的資料集，並且上傳kaggle。</p><p id="bbb63b96-e64d-429d-8f48-b947923485e3" class="">
+</p><figure id="177d11b1-40e0-47c1-b6e4-acfdaa5b404a" class="image"><a href="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-22_at_11.46.27_PM.png"><img style="width:1093px" src="%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%A6%82%E8%AB%96%20%E4%BD%9C%E6%A5%AD%E4%BA%94%20816418b190e044edae9e87751efe7e1c/Screen_Shot_2021-12-22_at_11.46.27_PM.png"/></a></figure><p id="1f4d7b23-c892-4891-bd4c-c57bf863d87e" class="">排名結果。</p><p id="f0b96306-bf19-41eb-8eb0-091120f04323" class="">因為寫作業的時間被期末週壓到很趕，我學分數蠻恐怖的，所以基本這個作業只有一天不到的時間就得寫完...</p><p id="43a21c49-da16-4794-ae01-2059bd9dc684" class="">蠻遺憾只能做出基本的模型，跟稍微調適一下就得結束了QQ。</p><p id="56326898-05e5-48c1-98df-6d6ecadd4904" class="">不過第一次使用kaggle也覺得打這種比賽感覺不錯，之後寒假有機會應該會回來玩~</p><p id="c83a8603-3196-4549-9a16-7e084a4743b1" class="">
+</p><h3 id="7feffe89-a631-4a37-a12b-6e73fc15b372" class="">Comparison &amp; Conclusion:</h3><hr id="4dadc9a1-cb1e-4b55-8945-210010e3fb00"/><p id="1251d4c7-d6bc-40fc-aecc-4e138e257dc8" class="">比較在上面都講完了，大概落在1~2層的表現會比較好。</p><p id="b0de025c-70bf-4cdb-a784-6f1fdfea04be" class="">感謝助教這個學期的作業配置，坦白說雙學位大三修了100多學分的課，我覺得這門課的助教真的是我看過最NB跟最勤奮的，沒有之二。</p><p id="276c3399-9e28-4fc1-8f30-49b25c0cecbe" class="">真的很幸運在初探ML不到一年就遇到這麼好的領路者，真的太謝謝尼們了~</p><p id="3845bd93-5a8d-4105-a8a2-e11da7eacecb" class="">下面是我的github帳號，不介意的話之後期待助教能夠分享更多猛猛的project:</p><p id="bd3ec918-19b1-4715-a0f8-d7c33b14a0ec" class="">🔗 :  <a href="https://github.com/SwarzChen">https://github.com/SwarzChen</a></p><p id="9a9983a3-9e0f-47a0-b132-6cc3781097ae" class="">
+</p></div></article></body></html>
